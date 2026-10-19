@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de ventilación</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f6f8;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .grafica {
+            width: 100%;
+            height: 400px;
+            background-color: white;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Dashboard de uso de ventilación</h1>
+
+    <div id="grafica-viento" class="grafica"></div>
+
+    <h2>Uso estimado de ventilación</h2>
+
+    <div id="grafica-usos" class="grafica"></div>
+
+    <script>
+        // Datos obtenidos del CSV
+        const dias = ["2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23","2026-10-24","2026-10-25"];
+        const velocidades = [7.6,4.9,7.3,3.8,5.4,3.6,3.2];
+        const usos = [12,25.5,13.5,31,23,32,34];
+
+        // Primera gráfica: velocidad del viento
+        const graficaViento = echarts.init(
+            document.getElementById("grafica-viento")
+        );
+
+        const opcionesViento = {
+            title: {
+                text: "Evolución de la velocidad media del viento"
+            },
+
+            tooltip: {
+                trigger: "axis"
+            },
+
+            xAxis: {
+                type: "category",
+                name: "Días",
+                data: dias
+            },
+
+            yAxis: {
+                type: "value",
+                name: "Viento (km/h)"
+            },
+
+            series: [{
+                name: "Velocidad media",
+                type: "line",
+                data: velocidades
+            }]
+        };
+
+        graficaViento.setOption(opcionesViento);
+
+        // Segunda gráfica: uso de ventilación
+        const graficaUsos = echarts.init(
+            document.getElementById("grafica-usos")
+        );
+
+        const opcionesUsos = {
+            title: {
+                text: "Uso diario de ventilación"
+            },
+
+            tooltip: {
+                trigger: "axis"
+            },
+
+            xAxis: {
+                type: "category",
+                name: "Días",
+                data: dias
+            },
+
+            yAxis: {
+                type: "value",
+                name: "Uso (kWh)"
+            },
+
+            series: [{
+                name: "Uso estimado",
+                type: "bar",
+                data: usos
+            }]
+        };
+
+        graficaUsos.setOption(opcionesUsos);
+    </script>
+</body>
+</html>

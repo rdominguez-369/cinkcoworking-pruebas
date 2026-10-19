@@ -1,5 +1,10 @@
 
 const fs = require("node:fs");
+const path = require("node:path");
+
+// Ruta absoluta del archivo CSV
+const rutaCSV = path.join(__dirname, "ventilacion.csv");
+
 // URL de la API meteorológica Open-Meteo
 const url = "https://api.open-meteo.com/v1/forecast"
     + "?latitude=40.4168"
@@ -57,7 +62,7 @@ async function obtenerVientos() {
         }
 
         // Guardamos el archivo CSV
-        fs.writeFileSync("ventilacion.csv", contenidoCSV, "utf8");
+        fs.writeFileSync(rutaCSV, contenidoCSV, "utf8");
 
         console.log("\nArchivo ventilacion.csv generado correctamente.");
 

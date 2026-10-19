@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de calefacción</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f6f8;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #grafica-temperaturas {
+            width: 100%;
+            height: 400px;
+            background-color: white;
+        }
+
+        #grafica-consumos {
+            width: 100%;
+            height: 400px;
+            background-color: white;
+            margin-top: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Dashboard de consumo de calefacción</h1>
+
+    <div id="grafica-temperaturas"></div>
+
+    <h2>Consumo estimado de calefacción</h2>
+
+    <div id="grafica-consumos"></div>
+
+    <script>
+        const dias = ["2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23","2026-10-24","2026-10-25"];
+        const temperaturas = [11.3,12.9,12.8,11.1,12.9,11.8,13];
+        const consumos = [37,21,22,39,21,32,20];
+
+        const grafica = echarts.init(
+            document.getElementById("grafica-temperaturas")
+        );
+
+        const opciones = {
+            title: {
+                text: "Evolución de la temperatura media diaria"
+            },
+
+            tooltip: {
+                trigger: "axis"
+            },
+
+            xAxis: {
+                type: "category",
+                name: "Días",
+                data: dias
+            },
+
+            yAxis: {
+                type: "value",
+                name: "Temperatura (°C)"
+            },
+
+            series: [{
+                name: "Temperatura media",
+                type: "line",
+                data: temperaturas
+            }]
+        };
+
+        grafica.setOption(opciones);
+
+        // Inicializamos la gráfica de consumo
+        const graficaConsumos = echarts.init(
+            document.getElementById("grafica-consumos")
+        );
+
+        // Configuración de la gráfica
+        const opcionesConsumos = {
+            title: {
+                text: "Consumo diario de calefacción"
+            },
+
+            tooltip: {
+                trigger: "axis"
+            },
+
+            xAxis: {
+                type: "category",
+                name: "Días",
+                data: dias
+            },
+
+            yAxis: {
+                type: "value",
+                name: "Consumo (kWh)"
+            },
+
+            series: [{
+                name: "Consumo estimado",
+                type: "bar",
+                data: consumos
+            }]
+        };
+
+        // Mostramos la gráfica
+        graficaConsumos.setOption(opcionesConsumos);
+        
+    </script>
+</body>
+</html>

@@ -32,7 +32,7 @@ async function obtenerTemperaturas() {
         //Convertimos la respuesta JSON en un objeto
         const datos = await respuesta.json();
 
-        // Extraemos las fichas y temperaturas
+        // Extraemos las fechas y temperaturas
         const dias = datos.daily.time;
         const temperaturas = datos.daily.temperature_2m_mean;
 

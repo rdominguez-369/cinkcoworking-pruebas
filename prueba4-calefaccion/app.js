@@ -1,5 +1,11 @@
-// URL de la API meteorológica Open-Meteo
+
 const fs = require("node:fs");
+const path = require("node:path");
+
+// Ruta absoluta del archivo CSV
+const rutaCSV = path.join(__dirname, "calefaccion.csv");
+
+// URL de la API meteorológica Open-Meteo
 const url = "https://api.open-meteo.com/v1/forecast"
 + "?latitude=40.4168"
 + "&longitude=-3.739399"
@@ -58,7 +64,7 @@ async function obtenerTemperaturas() {
         }
 
         // Guardamos los resultados en un archivo CSV
-        fs.writeFileSync("calefaccion.csv",contenidoCSV,"utf-8");
+        fs.writeFileSync(rutaCSV,contenidoCSV,"utf-8");
 
         console.log("\nArchivo calefaccion.csv generado correctamente.");
 

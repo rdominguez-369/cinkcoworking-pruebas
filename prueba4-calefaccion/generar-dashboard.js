@@ -1,7 +1,13 @@
+
 const fs = require("node:fs");
+const path = require("node:path");
+
+// Rutas absolutas de los archivos
+const rutaCSV = path.join(__dirname, "calefaccion.csv");
+const rutaHTML = path.join(__dirname, "dashboard.html");
 
 // Leemos el archivo CSV
-const contenidoCSV = fs.readFileSync("calefaccion.csv", "utf8");
+const contenidoCSV = fs.readFileSync(rutaCSV, "utf8");
 
 // Dividimos el contenido en líneas
 const lineas = contenidoCSV.trim().split(/\r?\n/);
@@ -160,6 +166,6 @@ const html = `
 `;
 
 // Guardamos el HTML generado
-fs.writeFileSync("dashboard.html", html, "utf8");
+fs.writeFileSync(rutaHTML, html, "utf8");
 
 console.log("Archivo dashboard.html generado correctamente.");
